@@ -27,14 +27,14 @@ jobs:
   MacOS:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v7
     - run: |
-        brew install automake msgpack libssh
+        brew install automake autoconf libtool pkg-config libevent msgpack libssh
         autoupdate
         ./autogen.sh
         ./configure
         make
-        make install
+        sudo make install
 
 
 
