@@ -199,18 +199,29 @@ if test "x$found_utempter" = xyes; then
 	fi
 fi
 
+# msgpack-c 4.x renamed the pkg-config module from msgpack to msgpack-c.
+# Try the new name first, then the old one, so both are accepted.
 PKG_CHECK_MODULES(
   MSGPACK,
-  msgpack >= 1.1.0,
+  msgpack-c >= 1.1.0,
   [
     CPPFLAGS="$MSGPACK_CFLAGS $CPPFLAGS"
     LIBS="$MSGPACK_LIBS $LIBS"
     found_msgpack=yes
   ],
-  found_msgpack=no
+  [PKG_CHECK_MODULES(
+    MSGPACK,
+    msgpack >= 1.1.0,
+    [
+      CPPFLAGS="$MSGPACK_CFLAGS $CPPFLAGS"
+      LIBS="$MSGPACK_LIBS $LIBS"
+      found_msgpack=yes
+    ],
+    found_msgpack=no
+  )]
 )
 if test "x$found_msgpack" = xno; then
-  AC_MSG_ERROR("msgpack >= 1.1.0 not found")
+  AC_MSG_ERROR("msgpack >= 1.1.0 not found (tried msgpack-c and msgpack)")
 fi
 
 PKG_CHECK_MODULES(
