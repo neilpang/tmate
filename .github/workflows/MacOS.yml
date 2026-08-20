@@ -7,6 +7,8 @@ on:
       - '**.c'
       - '**.h'
       - 'compat/*'
+      - 'configure.ac'
+      - 'Makefile.am'
       - '.github/workflows/MacOS.yml'
   pull_request:
     branches:
@@ -15,6 +17,8 @@ on:
       - '**.c'
       - '**.h'
       - 'compat/*'
+      - 'configure.ac'
+      - 'Makefile.am'
       - '.github/workflows/MacOS.yml'
 
 
