@@ -21,12 +21,18 @@ on:
 
 jobs:
   NetBSD:
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: vmactions/netbsd-vm@v0
+    - uses: actions/checkout@v7
+    - uses: vmactions/netbsd-vm@v1
       with:
+        release: "11"
         prepare: |
+          # The image's default PKG_PATH falls back to a 9.0 package set,
+          # which yields binaries linked against a libcrypto this host
+          # does not have.  Point it at the running release instead.
+          PKG_PATH="https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$(uname -m)/$(uname -r)/All/"
+          export PKG_PATH
           pkg_add  automake autoconf libtool pkgconf libevent msgpack libssh
         usesh: true
         run: |
