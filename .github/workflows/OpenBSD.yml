@@ -31,6 +31,7 @@ jobs:
     - uses: vmactions/openbsd-vm@v1
       with:
         release: "7"
+        cache-after-prepare: true
         prepare: |
           pkg_add  automake-1.18.1  autoconf-2.72p0  libtool libevent msgpack libssh curl
         usesh: true

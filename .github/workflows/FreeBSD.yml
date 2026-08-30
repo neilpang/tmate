@@ -31,6 +31,7 @@ jobs:
     - uses: vmactions/freebsd-vm@v1
       with:
         release: "15"
+        cache-after-prepare: true
         prepare: |
           pkg install -y  automake autoconf libtool pkgconf libevent msgpack-c libssh
         usesh: true
