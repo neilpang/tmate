@@ -36,14 +36,17 @@ jobs:
           pkg_add  automake-1.18.1  autoconf-2.72p0  libtool libevent msgpack libssh curl
         usesh: true
         run: |
+          # The port was removed from the ports tree (a916bade,
+          # "Remove sysutils/tmate"), so pin its patches to the
+          # last commit that still has them.
           sed -i 's,<event.h>,<event2/event.h>,'  *.[ch]
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-Makefile_am       | patch
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-server_c          | patch
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-tmate-debug_c     | patch
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-tmate_h           | patch
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-tmux_c            | patch
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-tmux_h            | patch
-          curl https://raw.githubusercontent.com/openbsd/ports/master/sysutils/tmate/patches/patch-osdep-openbsd_c   | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-Makefile_am       | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-server_c          | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-tmate-debug_c     | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-tmate_h           | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-tmux_c            | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-tmux_h            | patch
+          curl https://raw.githubusercontent.com/openbsd/ports/c8ae5de7b7e367e8eadd1e671743eb5705c12769/sysutils/tmate/patches/patch-osdep-openbsd_c   | patch
           export AUTOMAKE_VERSION=1.18
           export AUTOCONF_VERSION=2.72
           autoupdate
